@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Local Business Promoters</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        nav {
+            background-color: #2c3e50;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 25px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 12px 20px;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #3498db;
+            background-color: rgba(236, 240, 241, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);
+        }
+
+        .content {
+            padding: 40px 60px;
+            min-height: 80vh;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            animation: fadeIn 0.6s forwards 0.2s;
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .content h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .content p, .content ul {
+            font-size: 1.1rem;
+            color: #34495e;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            animation: fadeInUp 0.6s ease-out 0.3s forwards;
+        }
+
+        .content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content ul li {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content ul li:before {
+            content: '•';
+            color: #3498db;
+            position: absolute;
+            left: 0;
+        }
+
+        .choose-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .choose-card {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .choose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .choose-card h3 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .choose-card p {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .pricing-card h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 2rem;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        #contact-us {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f9;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="tel"]:focus,
+form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+@media (max-width: 768px) {
+  form {
+    padding: 20px;
+    width: 90%;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form textarea {
+    font-size: 14px;
+  }
+
+  form button {
+    font-size: 16px;
+    padding: 10px 18px;
+  }
+}
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul li {
+            padding: 8px 0;
+            color: #34495e;
+        }
+
+        .pricing-card button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            font-size: 1rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        #chatbot-toggle {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #chatbot-toggle:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.5);
+        }
+
+        #chatbot {
+            width: 350px;
+            height: 450px;
+            border: 2px solid #3498db;
+            display: none;
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        #chatbot.expanded {
+            width: 700px;
+            height: 800px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-width: 3px;
+        }
+
+        #chat-header {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #2c3e50;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-header button {
+            background: none;
+            border: none;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        #chat-header button:hover {
+            color: #3498db;
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #chat-input {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            border-top: 2px solid #ddd;
+            background-color: #fff;
+        }
+
+        #chat-input input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #chat-input input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+
+        #chat-input button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #chat-input button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .user-message {
+            background-color: #e1f7ff;
+            color: #2c3e50;
+            padding: 12px 18px;
+            margin-left: auto;
+            border-radius: 10px;
+            text-align: right;
+            word-break: break-word;
+            max-width: 75%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 0.4s ease-out;
+        }
+
+        .bot-message {
+            background-color: #f0f0f0;
+            color: #2c3e50;
+            padding: 12px 18px;
+            margin-right: auto;
+            border-radius: 10px;
+            text-align: left;
+            word-break: break-word;
+            max-width: 75%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: slideInLeft 0.4s ease-out 0.1s forwards;
+        }
+
+        .bot-message strong {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .content {
+                padding: 20px 30px;
+            }
+
+            .content h1 {
+                font-size: 2rem;
+            }
+
+            .content h2 {
+                font-size: 1.6rem;
+            }
+
+            .content p, .content ul {
+                font-size: 1rem;
+            }
+
+            .choose-cards, .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .choose-card, .pricing-card {
+                width: 90%;
+            }
+
+            #chatbot-container {
+                bottom: 10px;
+                left: 10px;
+                right: auto;
+            }
+
+            #chatbot {
+                width: 95%;
+                max-height: 60vh;
+                left: 2.5%;
+                right: 2.5%;
+                bottom: 10px;
+                top: auto;
+                position: fixed;
+            }
+
+            #chatbot.expanded {
+                width: 90%;
+                height: 80vh;
+                top: 10%;
+                left: 5%;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="#home" data-page="home" class="active">Home</a></li>
+            <li><a href="#about" data-page="about">About Us</a></li>
+            <li><a href="#services" data-page="services">Services</a></li>
+            <li><a href="#contact" data-page="contact">Contact Us</a></li>
+            <li><a href="#testimonials" data-page="testimonials">Testimonials</a></li>
+            <li><a href="#pricing" data-page="pricing">Pricing</a></li>
+            <li><a href="#blog" data-page="blog">Blog</a></li>
+            <li><a href="#faq" data-page="faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <div class="content" id="content"></div>
+
+    <div id="chatbot-container">
+        <button id="chatbot-toggle" onclick="toggleChat()">Chat with Us</button>
+        <div id="chatbot">
+            <div id="chat-header">Chat with our Business Promoter AI <button onclick="closeChat()">×</button></div>
+            <div id="chat-messages"></div>
+            <div id="chat-input">
+                <input type="text" id="chat-input-field" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Local Business Promoters. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        let currentPage = window.location.hash.slice(1) || 'home';
+        const pages = {
+            home: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Welcome to Local Business Promoters</h1>
+               <section id="welcome">
+  <p data-aos="fade-up" data-aos-delay="600">
+    At Local Business Promoters, we are more than just a marketing agency — we are your committed partners in growth. Our mission is to empower local businesses like yours with the tools, strategies, and support needed to thrive in today’s fast-paced digital world.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    We know the hustle of running a local business — tight budgets, fierce competition, and the need to wear multiple hats. That’s why our approach is designed to take the weight off your shoulders and allow you to focus on what you do best: delivering amazing products and services to your community.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    From digital marketing and branding to website development and customer engagement, we help small businesses break through the noise and stand out where it counts — right in your neighborhood.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Explore our services and discover how we can work together to transform your local business into a trusted, visible, and thriving brand in your area.
+  </p>
+</section>
+
+<section id="what-we-do">
+  <h2 data-aos="fade-up" data-aos-delay="800">What We Do</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    We provide a full suite of personalized marketing and development solutions tailored to local businesses. Whether you're launching a new business or revamping an established brand, our flexible services scale with your needs and budget.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Our team is composed of creative thinkers, digital strategists, SEO experts, and designers — all aligned to help your business make meaningful connections with your customers.
+  </p>
+
+  <ul class="services-list">
+    <li data-aos="fade-up" data-aos-delay="600">
+      ✅ <strong>Targeted Marketing Campaigns</strong><br>
+      We take the time to understand your audience, your brand, and your goals. Then, we craft laser-focused campaigns that speak directly to the people most likely to become your loyal customers — all while keeping your message authentic and impactful.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      📍 <strong>Local SEO Optimization</strong><br>
+      Showing up in the right place at the right time is key. We optimize your Google My Business listing, website content, and local citations so that nearby customers find you first — before your competitors.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      🎯 <strong>Social Media Management</strong><br>
+      We create, schedule, and manage your content across all major social platforms. Our goal is to keep your brand active, visible, and engaging with followers who become real-world customers.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      🛠️ <strong>Website Design & Optimization</strong><br>
+      Your website is your digital storefront. We build stunning, mobile-friendly websites that are not just beautiful — but functional, fast, and designed to convert visitors into paying customers.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      📨 <strong>Email Marketing Campaigns</strong><br>
+      Keep your audience informed, inspired, and engaged. From newsletters to promotions, we create emails your customers will actually want to open — and take action on.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      📊 <strong>Performance Tracking & Transparent Reporting</strong><br>
+      You deserve to know how your investment is performing. We provide detailed yet easy-to-understand reports that break down what’s working and where we can do even better — always striving for growth.
+    </li>
+
+    <li data-aos="fade-up" data-aos-delay="600">
+      💡 <strong>Brand Identity & Visual Strategy</strong><br>
+      Need a fresh look or consistent branding? Our designers and strategists work with you to create a compelling identity — logo, colors, fonts, and messaging that resonate with your audience and reflect your mission.
+    </li>
+  </ul>
+</section>
+
+<section id="why-local-matters">
+  <h2 data-aos="fade-up" data-aos-delay="800">Why Local Matters</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    In today’s global marketplace, local businesses are the true heroes of our neighborhoods. You’re the place that knows your customers by name. You’re the reason our towns feel like home. And you deserve to be seen.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Local businesses drive economies, create jobs, and build culture. They bring personal care and authentic experiences that no big-box brand can replicate. But standing out among digital giants requires more than just passion — it takes strategy.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    That’s where we come in. Our job is to make your voice heard, your presence felt, and your community connection stronger than ever. By using cutting-edge technology blended with heartfelt storytelling, we help you reach more people, build trust, and grow a business that makes a difference — right where it matters most.
+  </p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    When local businesses succeed, communities thrive. And we're proud to be a part of that journey.
+  </p>
+</section>
+
+                        <h2 data-aos="fade-up" data-aos-delay="800">Why Choose Us?</h2>
+                    <p data-aos="fade-up" data-aos-delay="900">Comprehensive solutions for your business growth</p>
+                <div class="choose-cards" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="choose-card">
+                        <img src="https://png.pngtree.com/element_our/png/20181114/growth-icon-png_239826.jpg" alt="Strategic Growth" width="40" height="40">
+                        <h3>Strategic Growth</h3>
+                        <p>Data-driven strategies to accelerate your business growth in the local market.</p>
+                        <ul>
+                            <li>Market Analysis</li>
+                            <li>Competitor Research</li>
+                            <li>Growth Planning</li>
+                        </ul>
+                    </div>
+                    <div class="choose-card">
+                        <img src="https://img.icons8.com/ios-filled/50/3498db/user-group-man-man.png" alt="Digital Presence">
+                        <h3>Digital Presence</h3>
+                        <p>Build and maintain a strong online presence that attracts and engages customers.</p>
+                        <ul>
+                            <li>Social Media</li>
+                            <li>SEO Optimization</li>
+                            <li>Content Strategy</li>
+                        </ul>
+                    </div>
+                    <div class="choose-card">
+                        <img src="https://img.icons8.com/ios-filled/50/3498db/trophy.png" alt="Market Leadership">
+                        <h3>Market Leadership</h3>
+                        <p>Establish your business as the go-to choice in your local market.</p>
+                        <ul>
+                            <li>Brand Building</li>
+                            <li>Customer Loyalty</li>
+                            <li>Market Position</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            about: `
+                <h1 data-aos="fade-up" data-aos-delay="200">About Us</h1>
+                <p data-aos="fade-up" data-aos-delay="400">Local Business Promoters was founded with a passion for supporting the backbone of our communities – local businesses. We understand the unique challenges and opportunities that come with operating locally, and we're here to provide innovative and effective solutions.</p>
+                <p data-aos="fade-up" data-aos-delay="600">Our team comprises experienced marketers, web developers, and business strategists committed to your success.</p>
+                <br>
+                <h2 data-aos="fade-up" data-aos-delay="800">🌟 Our Story</h2>
+                <br>
+                <br>
+                <p data-aos="fade-up" data-aos-delay="800">Local Business Promoters was founded with a clear mission: to empower local businesses and help them shine in their communities and beyond. We believe that small businesses are more than just service providers — they’re dream chasers, family legacies, neighborhood anchors, and the real spirit behind thriving local economies.
+                What started as a small initiative to help a few shops in the neighborhood quickly turned into a full-fledged movement to uplift local enterprises everywhere. We saw passionate business owners with incredible potential struggling to be seen online. That’s when we decided to bridge the gap between local passion and digital innovation.
+                </p>
+                <br>
+                <h2 data-aos="fade-up" data-aos-delay="800">👥 Our Team </h2>
+               <p data-aos="fade-up" data-aos-delay="800" > We're a close-knit team of:
+                <br>
+                <br>
+
+                <strong>Creative Marketers</strong>
+                 who know how to craft the right message and deliver it to the right audience.
+                 <br>
+                 <br>
+
+               <strong> Skilled Web Developers</strong>
+                who build stunning, functional, and mobile-optimized websites tailored to your brand.
+                <br>
+                <br>
+
+                <strong>Strategic Growth</strong>
+                 Experts who focus on scalable plans, analytics, and measurable success.
+                <br>
+                <br>
+                <strong>Local Enthusiasts</strong>
+                 who genuinely care about your story and your impact in the community.
+            
+                <br>
+                Every project we take on is driven by a genuine desire to see you succeed.
+                <br>
+                <br>
+                </p>
+
+                <h2 data-aos="fade-up" data-aos-delay="800">💡 What Sets Us Apart?</h2>
+                <br>
+                <br>
+                <p data-aos="fade-up" data-aos-delay="800">
+               <strong> Local First Approach:</strong>
+                 We don’t believe in generic marketing. Everything we do is crafted with your community, customers, and goals in mind.
+                    <br>
+                    <br>
+                <strong>Transparent Communication:</strong>
+                     You’ll always know what we’re doing, why we’re doing it, and how it’s working.
+                     <br>
+                     <br>
+
+              <strong>  Affordable Packages:</strong>
+                 Big results don’t have to mean big budgets. We’ve designed services to suit even the tightest of margins.
+                    <br>
+                    <br>
+                <strong>Long-Term Relationships:</strong>
+                     We grow with you — as partners, not just service providers.
+                     <br>
+                     </p>
+
+               <h2 data-aos="fade-up" data-aos-delay="800"> 🙌 Our Commitment to You</h2>
+               <p data-aos="fade-up" data-aos-delay="800"> When you work with Local Business Promoters, you’re not just getting a service — you’re getting a dedicated team that treats your business like it’s our own. We’re in it for the long haul, ready to adapt, grow, and thrive with you at every stage of your journey.
+                </p>
+            `,
+            services: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Our Services</h1>
+                <ul data-aos="fade-up" data-aos-delay="400">
+                    <li><strong>Local SEO Optimization:</strong> Improve your visibility in local search results.</li>
+                    <li><strong>Social Media Marketing:</strong> Engage with your local customers on popular platforms.</li>
+                    <li><strong>Website Design & Development:</strong> Create a professional online presence.</li>
+                    <li><strong>Email Marketing:</strong> Reach your audience with targeted campaigns.</li>
+                    <li><strong>Content Creation:</strong> Develop engaging content that resonates with local customers.</li>
+                </ul>
+                <p data-aos="fade-up" data-aos-delay="600">Contact us to learn more about how these services can benefit your business.</p>
+                 <p data-aos="fade-up" data-aos-delay="600">
+    At <strong>Local Business Promoters</strong>, we offer a powerful suite of services specifically designed to help <strong>local businesses grow, compete, and thrive</strong>. Whether you’re looking to increase foot traffic, build an online presence, or drive more leads, we have the tools and expertise to make it happen.
+  </p>
+  <br>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📍 Local SEO Optimization</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Be found when it matters most.</strong> We optimize your website, Google Business Profile, and online directories so you appear in local search results and on maps — right when nearby customers are searching for businesses like yours.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📱 Social Media Marketing</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Build community. Create conversations. Drive action.</strong> From crafting engaging posts to running targeted ads, we help you grow your following and turn social media into a consistent source of customer engagement and brand awareness.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">💻 Website Design & Development</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Make your first impression count.</strong> We design modern, fast, and mobile-friendly websites tailored to your brand, combining visuals with user-focused functionality.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">✉️ Email Marketing</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Stay top of mind with your customers.</strong> Send personalized, impactful email campaigns that promote your offers, events, or updates. From templates to analytics — we’ve got you.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📝 Content Creation</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Tell your story in a way that connects.</strong> We create blogs, videos, and graphics that reflect your values and engage your audience.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📊 Analytics & Performance Tracking</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Know what’s working. Improve what’s not.</strong> We track every campaign, analyze data, and provide reports that help you make smart decisions.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">🎯 Paid Advertising</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Reach the right audience, right now.</strong> We run ROI-driven ad campaigns on Google, Facebook, and Instagram, bringing you more customers quickly.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">🧠 Business Strategy & Consultation</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Your vision, backed by our strategy.</strong> We offer one-on-one consulting to help you scale, rebrand, or launch new services with confidence.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">🤝 Community Engagement Campaigns</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    <strong>Be more than a business — be a local icon.</strong> We create buzz by organizing events, promotions, and partnerships that build trust and loyalty in your community.
+  </p>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    📞 <strong>Contact us</strong> today to discover how these services can transform your local business into a thriving brand.
+  </p>
+            `,
+            contact: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Contact Us</h1>
+               
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    We’d love to hear from you! Whether you're ready to start a project, have a few questions about how we can help your business grow, or just want to chat about your goals, we’re here to help. Our team is dedicated to providing personalized support every step of the way.
+  </p>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    Don’t hesitate to reach out — **every inquiry is important to us**. Whether it’s through email, phone, or even an in-person visit, we’re committed to responding quickly and providing the information you need. We understand the challenges of running a business, and we’re here to make your life easier with effective solutions.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📧 Email</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    For detailed inquiries, quotes, or to ask about any of our services, you can reach us at <a href="mailto:info@localbusinesspromoters.com">arnav4188@gmail.com</a>. Our inbox is always open, and we aim to respond within 24 hours.
+    <br>
+    Whether it’s a quick question or a long-term project, feel free to drop us a line. We love helping businesses like yours!
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📞 Phone</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Prefer to chat directly? Give us a call at <a href="tel:1234567890">9142364190</a>.  
+    <br>
+    We’re available Monday through Saturday, 9:00 AM – 6:00 PM. We’ll pick up the phone to discuss your needs, provide more information, or schedule a free consultation.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">📍 Address</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Feel free to visit us at our office located at <strong>33, LPU, Phagwara</strong>. We welcome you to schedule a visit and meet with us face-to-face to discuss how we can help elevate your business.
+    <br>
+    We’re available by appointment to ensure we give you the time and attention your business deserves. Simply give us a call or shoot us an email to set up a meeting.
+  </p>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">💬 Online Contact Form</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Alternatively, you can fill out the form below, and one of our specialists will get back to you as soon as possible. We’ll listen to your needs, answer your questions, and set up a time to discuss the next steps.
+    <br>
+    Our goal is to make the process as easy and smooth as possible, so feel free to tell us about your business challenges and the kind of solutions you’re looking for.
+  </p>
+
+  <form data-aos="fade-up" data-aos-delay="700" action="#" method="POST">
+    <label for="name">Your Name:</label><br>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required><br><br>
+
+    <label for="email">Your Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
+
+    <label for="phone">Your Phone Number:</label><br>
+    <input type="tel" id="phone" name="phone" placeholder="Your phone number (optional)"><br><br>
+
+    <label for="message">Your Message:</label><br>
+    <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help" required></textarea><br><br>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <h2 data-aos="fade-up" data-aos-delay="800">🌍 Follow Us Online</h2>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Stay updated on our latest services, tips, and success stories by following us on social media:
+    <br>
+    <a href="https://facebook.com" target="_blank">Facebook</a> | <a href="https://instagram.com" target="_blank">Instagram</a> | <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+  </p>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    We look forward to connecting with you and discussing how we can support your local business in achieving new levels of success. Don’t wait — reach out today, and let’s start growing together!
+  </p>
+
+            `,
+            testimonials: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Testimonials</h1>
+               
+                <section id="testimonials">
+  <h2 data-aos="fade-up" data-aos-delay="800">What Our Clients Say</h2>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    At Local Business Promoters, we pride ourselves on delivering exceptional results that make a real impact. But don't just take our word for it — here’s what our clients have to say about working with us.
+  </p>
+
+  <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+    <h2>Arnav Singh, Owner of "Chai Sutta Bar"</h2>
+    <p>
+      "Local Business Promoters significantly increased our local customer base. Their SEO strategies really put us on the map! Our website traffic and in-store visits have skyrocketed. The team’s professionalism and attention to detail were beyond what we expected. Highly recommend their services!"
+    </p>
+  </div>
+
+  <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+    <h2>Shivam Rawat, Manager at "Kitchen Ette"</h2>
+    <p>
+      "The social media campaigns they designed were incredibly effective in driving foot traffic to our store. Thanks to their efforts, our online presence is stronger than ever, and we’ve seen a significant boost in sales. Highly recommend their services!"
+    </p>
+  </div>
+
+  <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+    <h2>Satyam Kumar, Founder of "WH Smith"</h2>
+    <p>
+      "I’ve been working with Local Business Promoters for over a year now, and the growth we’ve experienced has been nothing short of amazing. Their local SEO and content strategies have helped us reach new customers, and their team is always on hand to provide insights and recommendations. If you want to grow your local business, these are the people to talk to!"
+    </p>
+  </div>
+
+  <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+    <h2>Baldev, Owner of "Food Court"</h2>
+    <p>
+      "When we first came to Local Business Promoters, our business was struggling to gain visibility online. Thanks to their comprehensive approach, including targeted online ads, local SEO, and detailed analytics, we saw a tremendous increase in website traffic and sales. They really take the time to understand your business and customize solutions accordingly."
+    </p>
+  </div>
+
+  <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+    <h2>Ashok, Manager of "Lovely Bakery"</h2>
+    <p>
+      "We saw a huge improvement in our local visibility after working with Local Business Promoters. Their SEO expertise is unmatched, and the tailored social media strategy they created helped us build stronger connections with our community. They really know how to make a local business stand out!"
+    </p>
+  </div>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    These are just a few of the many success stories we’ve helped create. Ready to take your business to the next level? <strong>Contact us today</strong> and let’s make your success story the next one we share!
+  </p>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    <a href="#contact-us" class="cta-button">Get Started Today</a>
+  </p>
+</section>
+
+            `,
+            pricing: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Pricing Plans</h1>
+                <p data-aos="fade-up" data-aos-delay="400">Discover our flexible pricing options designed to meet the diverse needs of local businesses. Whether you're just starting out or looking to scale, we have a plan that fits your budget and goals. Our packages include expert support, regular updates, and tailored strategies to ensure your success.</p>
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h2>Basic Plan</h2>
+                        <p class="price">$99/month</p>
+                        <ul>
+                            <li>Initial SEO audit and optimization for local search</li>
+                            <li>Social media setup and management for 2 platforms</li>
+                            <li>Basic website health check and minor updates</li>
+                            <li>Monthly performance report with actionable insights</li>
+                            <li>Email support during business hours</li>
+                            <li>Access to our beginner's marketing guide</li>
+                        </ul>
+                        <button>Get Started</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h2>Pro Plan</h2>
+                        <p class="price">$199/month</p>
+                        <ul>
+                            <li>Comprehensive SEO strategy including keyword research</li>
+                            <li>Social media management for up to 4 platforms with content creation</li>
+                            <li>Custom website design or redesign with mobile optimization</li>
+                            <li>Weekly email marketing campaigns with personalized content</li>
+                            <li>Dedicated account manager for personalized support</li>
+                            <li>Access to advanced analytics dashboard</li>
+                            <li>Quarterly strategy review session</li>
+                        </ul>
+                        <button>Get Started</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h2>Premium Plan</h2>
+                        <p class="price">$299/month</p>
+                        <ul>
+                            <li>Full-scale SEO and local listing management</li>
+                            <li>Social media management across all major platforms with ad campaigns</li>
+                            <li>Premium website development with e-commerce integration</li>
+                            <li>Daily email and social media marketing with A/B testing</li>
+                            <li>24/7 priority support with a dedicated team</li>
+                            <li>Monthly in-depth performance reports and strategy adjustments</li>
+                            <li>Exclusive access to our premium marketing toolkit and webinars</li>
+                            <li>Annual business growth consultation with our experts</li>
+                        </ul>
+                        <button>Get Started</button>
+                    </div>
+                </div>
+                <p data-aos="fade-up" data-aos-delay="800">Not sure which plan is right for you? Contact us for a free consultation to discuss your business needs and find the perfect fit!</p>
+            `,
+            blog: `
+                <h1 data-aos="fade-up" data-aos-delay="200"> Our Blog</h1>
+               
+
+                                    <section id="blog">
+
+                    <p data-aos="fade-up" data-aos-delay="600">
+                        Stay updated with the latest trends, tips, and actionable insights to help your local business grow. Our blog is packed with resources, expert advice, and proven strategies designed specifically for businesses looking to succeed in their local market.
+                    </p>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="800">
+                        <h2>5 SEO Tips for Small Businesses</h2>
+                        <p>
+                        SEO can seem intimidating, but it’s crucial for increasing your local visibility. In this post, we’ll walk you through five simple SEO tips that can make a big difference for your small business. From optimizing for local search to improving on-page elements, these tips will help you boost your rankings and attract more customers.
+                       
+                       <br> <a href="#">Read More</a>
+                        </p>
+                    </div>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="800">
+                        <h2>How Social Media Boosts Local Sales</h2>
+                        <p>
+                        Social media isn’t just about likes and shares — it’s a powerful tool to drive foot traffic to your business. In this blog post, we’ll show you how to use social media platforms effectively to engage with your local community, build brand awareness, and increase sales. Discover strategies that you can implement right away.
+                       <br> <a href="#">Read More</a>
+                        </p>
+                    </div>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="800">
+                        <h2>The Power of Email Campaigns</h2>
+                        <p>
+                        Email marketing is one of the most cost-effective ways to stay connected with your customers. In this post, we discuss the importance of email campaigns, how to craft compelling newsletters, and why personalized emails can significantly improve customer loyalty and sales.
+                       <br> <a href="#">Read More</a>
+                        </p>
+                    </div>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="800">
+                        <h2>Why Online Reviews Matter for Your Local Business</h2>
+                        <p>
+                        Online reviews are more important than ever when it comes to attracting local customers. Learn how you can encourage customers to leave positive reviews, manage your online reputation, and use feedback to build trust and credibility within your community.
+                       <br> <a href="#">Read More</a>
+                        </p>
+                    </div>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="800">
+                        <h2>How to Create a Winning Local Marketing Strategy</h2>
+                        <p>
+                        A well-executed local marketing strategy can make all the difference in growing your business. In this post, we’ll break down how to create a plan that targets the right audience, utilizes the best platforms, and maximizes your local reach. Let’s make sure your marketing dollars are spent wisely!
+                       <br> <a href="#">Read More</a>
+                        </p>
+                    </div>
+
+                    <p data-aos="fade-up" data-aos-delay="600">
+                        Check back regularly for more insights and actionable tips that will help your local business thrive. Whether you're looking to increase online visibility, improve customer engagement, or optimize your marketing efforts, we've got the resources to help you succeed.
+                    </p>
+
+                    <p data-aos="fade-up" data-aos-delay="600">
+                        <a href="#contact-us" class="cta-button">Start Growing Your Business Today</a>
+                    </p>
+                    </section>
+
+            `,
+            faq: `
+                <h1 data-aos="fade-up" data-aos-delay="200">Frequently Asked Questions</h1>
+                <section id="faq">
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    Find answers to some of the most common questions we receive about our services. If you don’t see your question here, feel free to <a href="#contact-us">contact us directly</a>.
+  </p>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>What areas do you serve?</h2>
+    <p>
+      We primarily serve local businesses within a 50-mile radius of our main office, but we’re also happy to work with businesses in surrounding regions. If you’re unsure whether we can help your area, just reach out — we’re always looking to expand our reach!
+    </p>
+  </div>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>How long does it take to see results?</h2>
+    <p>
+      Most clients begin to see noticeable improvements within 1–3 months, depending on the selected plan and strategy. SEO and organic growth take time, but with consistent effort, we aim for sustainable long-term results.
+    </p>
+  </div>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>Can I cancel my plan anytime?</h2>
+    <p>
+      Yes, we offer flexible plans. You can cancel at any time with a 30-day written notice. We believe in earning your business through results, not contracts.
+    </p>
+  </div>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>What makes your services different from others?</h2>
+    <p>
+      We focus specifically on local business growth. Our team combines in-depth market knowledge, modern digital strategies, and personalized service to deliver results. We’re not a one-size-fits-all agency — we tailor every campaign to your business goals.
+    </p>
+  </div>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>Do you work with all types of businesses?</h2>
+    <p>
+      Yes! We work with restaurants, boutiques, service providers, health clinics, repair shops, and more. As long as your goal is to grow your local presence, we can help you get there.
+    </p>
+  </div>
+
+  <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+    <h2>Is there a setup fee?</h2>
+    <p>
+      In most cases, there is a small one-time setup fee to cover initial strategy, analytics configuration, and onboarding. We’ll be transparent about all costs before you commit.
+    </p>
+  </div>
+
+  <p data-aos="fade-up" data-aos-delay="600">
+    Still have questions? Our friendly support team is here to help. <a href="#contact-us">Reach out now</a> and we’ll get back to you as soon as possible!
+  </p>
+</section>
+
+            `
+        };
+
+        const navLinks = document.querySelectorAll('nav a');
+        const contentDiv = document.getElementById('content');
+        const chatbot = document.getElementById('chatbot');
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input-field');
+
+        function loadPage(page) {
+            contentDiv.style.opacity = '0';
+            setTimeout(() => {
+                contentDiv.innerHTML = pages[page];
+                contentDiv.style.opacity = '1';
+                AOS.refresh();
+                window.scrollTo(0, 0);
+            }, 300);
+            currentPage = page;
+            updateActiveLink();
+        }
+
+        function updateActiveLink() {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                if (page !== currentPage) {
+                    loadPage(page);
+                    updateURL(page);
+                }
+            });
+        });
+
+        window.addEventListener('popstate', () => {
+            const page = window.location.hash.slice(1) || 'home';
+            if (pages[page]) loadPage(page);
+        });
+
+        function updateURL(page) {
+            history.pushState({}, page, `#${page}`);
+        }
+
+        loadPage(currentPage);
+
+        function toggleChat() {
+            const isExpanded = chatbot.classList.contains('expanded');
+            if (isExpanded) {
+                chatbot.classList.remove('expanded');
+                chatbot.style.display = 'none';
+            } else {
+                chatbot.style.display = 'flex';
+                setTimeout(() => chatbot.classList.add('expanded'), 10);
+            }
+        }
+
+        function closeChat() {
+            chatbot.classList.remove('expanded');
+            chatbot.style.display = 'none';
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = text;
+            messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+    const message = chatInput.value.trim().toLowerCase();
+    if (!message) return;
+
+    addMessage(message, 'user');
+    chatInput.value = '';
+
+    // List of business-related keywords
+    const businessKeywords = [
+        'sales', 'marketing', 'growth', 'business', 'customers', 'seo', 
+        'advertising', 'branding', 'strategy', 'revenue', 'promotion', 
+        'engagement', 'leads', 'online', 'website', 'social media','shop','restaurants','medical','entrepreneurship','brand',
+
+    ];
+
+    // Check if the query contains any business-related keywords
+    const isBusinessQuery = businessKeywords.some(keyword => message.includes(keyword));
+
+    if (!isBusinessQuery) {
+        addMessage('<strong>Business Promoter AI:</strong> I’m sorry, but I’m designed to assist with business-related queries only. Please ask about topics like sales, marketing, or business growth, and I’d be happy to help!', 'bot');
+        return;
+    }
+
+    const apiKey = 'AIzaSyB_fBcFdsSI4uelAR9YLHn1EXXAhOe74j8'; // Replace with your actual Gemini API key
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    // Enhanced prompt to request a structured response
+    const prompt = `You are a Business Promoter AI. Provide a detailed, professional response to the user's business-related question: "${message}". Structure your answer as a list of clear, concise points with proper grammar. Ensure each point is a complete sentence and relevant to growing or managing a local business.`;
+
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }]
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I couldn\'t generate a response.';
+        
+        // Post-process the response to ensure bullet points
+        reply = reply.replace(/\n/g, '<br>'); // Preserve line breaks
+        const points = reply.split('. ').filter(point => point.trim().length > 0);
+        let formattedReply = '<strong>Business Promoter AI:</strong><ul>';
+        points.forEach(point => {
+            if (point.trim()) {
+                formattedReply += `<li>${point.trim()}.</li>`;
+            }
+        });
+        formattedReply += '</ul>';
+
+        addMessage(formattedReply, 'bot');
+    })
+    .catch(error => {
+        console.error('Error calling Gemini API:', error);
+        addMessage('<strong>Business Promoter AI:</strong> Sorry, an error occurred while trying to respond.', 'bot');
+    })
+
+    .catch(error => {
+        console.error('Error calling Gemini API:', error);
+        addMessage('<strong>Business Promoter AI:</strong> Sorry, an error occurred while trying to respond.', 'bot');
+    });
+}
+
+        chatbot.style.display = 'none';
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+
+        const chatHeader = document.getElementById('chat-header');
+        chatHeader.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+
+        function startDragging(e) {
+            if (chatbot.classList.contains('expanded')) {
+                isDragging = true;
+                initialX = e.clientX - currentX;
+                initialY = e.clientY - currentY;
+                chatHeader.style.cursor = 'grabbing';
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                chatbot.style.left = currentX + 'px';
+                chatbot.style.top = currentY + 'px';
+            }
+        }
+
+        function stopDragging() {
+            isDragging = false;
+            chatHeader.style.cursor = 'move';
+        }
+    </script>
+</body>
+</html>
